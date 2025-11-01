@@ -1,0 +1,54 @@
+{
+	"name": "companion-surface-xkeys",
+	"version": "0.1.0",
+	"main": "dist/main.js",
+	"type": "module",
+	"scripts": {
+		"postinstall": "husky",
+		"format": "prettier -w .",
+		"package": "run build && companion-surface-build",
+		"build": "rimraf dist && run build:main",
+		"build:main": "tsc -p tsconfig.build.json",
+		"dev": "tsc -p tsconfig.build.json --watch",
+		"dist": "companion-surface-build",
+		"lint:raw": "eslint",
+		"lint": "run lint:raw ."
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-surface-xkeys.git"
+	},
+	"engines": {
+		"node": "^22.14",
+		"yarn": "^4"
+	},
+	"dependencies": {
+		"@companion-surface/base": "~0.4.2",
+		"xkeys": "^3.3.0"
+	},
+	"devDependencies": {
+		"@companion-module/tools": "2.4.2-nightly-main-20251021-232112-36bfae9",
+		"@types/node": "^22.18.13",
+		"eslint": "^9.39.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.6",
+		"prettier": "^3.6.2",
+		"rimraf": "^6.1.0",
+		"typescript": "~5.9.3",
+		"typescript-eslint": "^8.46.2"
+	},
+	"resolutions": {
+		"@xkeys-lib/core@npm:3.3.0": "patch:@xkeys-lib/core@npm%3A3.3.0#~/.yarn/patches/@xkeys-lib-core-npm-3.3.0-1a65b6423b.patch"
+	},
+	"prettier": "@companion-module/tools/.prettierrc.json",
+	"lint-staged": {
+		"*.{css,json,md,scss}": [
+			"prettier --write"
+		],
+		"*.{ts,tsx,js,jsx}": [
+			"yarn lint:raw --fix"
+		]
+	},
+	"packageManager": "yarn@4.10.3"
+}
