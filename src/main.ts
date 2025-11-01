@@ -7,9 +7,14 @@ import type {
 } from '@companion-surface/base'
 import { XKeysWrapper } from './instance.js'
 import { createSurfaceSchema, createTransferVariables } from './surface-schema.js'
-import { setupXkeysPanel } from 'xkeys'
+import { setupXkeysPanel, XKeys } from 'xkeys'
 
-const XKeysPlugin: SurfacePlugin<HIDDevice> = {
+interface XKeysInfo {
+	info: NonNullable<ReturnType<typeof XKeys.filterDevice>>
+	path: string
+}
+
+const XKeysPlugin: SurfacePlugin<XKeysInfo> = {
 	init: async (): Promise<void> => {
 		// Nothing to do
 	},
@@ -17,24 +22,24 @@ const XKeysPlugin: SurfacePlugin<HIDDevice> = {
 		// Nothing to do
 	},
 
-	checkSupportsHidDevice: (deviceInfo): DiscoveredSurfaceInfo<HIDDevice> | null => {
-		if (deviceInfo.vendorId === 1523 && deviceInfo.interface === 0) {
-			// TODO: how to do this
-			// const surfaceId = `xkeys:${panel.info.productId}-${panel.info.unitId}` // TODO - this needs some additional uniqueness to the suffix
+	checkSupportsHidDevice: (deviceInfo): DiscoveredSurfaceInfo<XKeysInfo> | null => {
+		const surfaceInfo = XKeys.filterDevice(deviceInfo as Required<HIDDevice>)
+		if (!surfaceInfo) return null
 
-			return {
-				surfaceId: `xkeys:${deviceInfo.path}`, // TODO - this is bad
-				description: deviceInfo.product ? `XKeys ${deviceInfo.product}` : 'XKeys Device',
-				pluginInfo: deviceInfo,
-			}
-		} else {
-			return null
+		const unitId = 0 // TODO - what to do instead of this, as we can't open the panel to check this anymore..
+		return {
+			surfaceId: `xkeys:${surfaceInfo.productId}-${unitId}`,
+			description: `XKeys ${surfaceInfo.product.name}`,
+			pluginInfo: {
+				path: deviceInfo.path,
+				info: surfaceInfo,
+			},
 		}
 	},
 
 	openSurface: async (
 		surfaceId: string,
-		pluginInfo: HIDDevice,
+		pluginInfo: XKeysInfo,
 		context: SurfaceContext,
 	): Promise<OpenSurfaceResult> => {
 		const device = await setupXkeysPanel(pluginInfo.path)
