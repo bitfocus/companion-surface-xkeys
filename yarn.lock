@@ -47,12 +47,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@companion-surface/base@npm:~0.4.2":
-  version: 0.4.2
-  resolution: "@companion-surface/base@npm:0.4.2"
+"@companion-surface/base@npm:~0.5.0":
+  version: 0.5.0
+  resolution: "@companion-surface/base@npm:0.5.0"
   dependencies:
     tslib: "npm:^2.8.1"
-  checksum: 10c0/3e62ffbd160951c47bdbcb7ae4f65b8f48e20d5e2b8e2a2584bfb548c13f90637b6e6229fc59e8732e058f3b6c152a7892fe4eded7f4972430467a1efba8ff96
+  checksum: 10c0/b6aeda8326b0900dd6ee2d3f1a5d331780f1cdce20adb484a377799bcedfb18d024eb46173f600bddeba456e59bd1f42d56a75a1f1d9def386b3b8defb429cfe
   languageName: node
   linkType: hard
 
@@ -1097,7 +1097,7 @@ __metadata:
   resolution: "companion-surface-xkeys@workspace:."
   dependencies:
     "@companion-module/tools": "npm:2.4.2-nightly-main-20251021-232112-36bfae9"
-    "@companion-surface/base": "npm:~0.4.2"
+    "@companion-surface/base": "npm:~0.5.0"
     "@types/node": "npm:^22.18.13"
     eslint: "npm:^9.39.0"
     husky: "npm:^9.1.7"
