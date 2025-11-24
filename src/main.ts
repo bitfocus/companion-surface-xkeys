@@ -26,9 +26,8 @@ const XKeysPlugin: SurfacePlugin<XKeysInfo> = {
 		const surfaceInfo = XKeys.filterDevice(deviceInfo as Required<HIDDevice>)
 		if (!surfaceInfo) return null
 
-		const unitId = 0 // TODO - what to do instead of this, as we can't open the panel to check this anymore..
 		return {
-			surfaceId: `xkeys:${surfaceInfo.productId}-${unitId}`,
+			surfaceId: `xkeys:${deviceInfo.serialNumber}`, // Use the faked serial number
 			description: `XKeys ${surfaceInfo.product.name}`,
 			pluginInfo: {
 				path: deviceInfo.path,

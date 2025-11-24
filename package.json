@@ -1,6 +1,6 @@
 {
 	"name": "companion-surface-xkeys",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"main": "dist/main.js",
 	"type": "module",
 	"scripts": {
@@ -25,7 +25,7 @@
 		"yarn": "^4"
 	},
 	"dependencies": {
-		"@companion-surface/base": "~0.5.0",
+		"@companion-surface/base": "~0.6.1",
 		"xkeys": "^3.3.0"
 	},
 	"devDependencies": {
