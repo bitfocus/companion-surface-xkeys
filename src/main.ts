@@ -26,8 +26,12 @@ const XKeysPlugin: SurfacePlugin<XKeysInfo> = {
 		const surfaceInfo = XKeys.filterDevice(deviceInfo as Required<HIDDevice>)
 		if (!surfaceInfo) return null
 
+		// Create a simple and safe version of the product name to use as the basis of the surface ID
+		const safeProductName = surfaceInfo.product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+
 		return {
-			surfaceId: `xkeys:${deviceInfo.serialNumber}`, // Use the faked serial number
+			surfaceId: `xkeys:${safeProductName}`, // Use the faked serial number
+			surfaceIdIsNotUnique: true,
 			description: `XKeys ${surfaceInfo.product.name}`,
 			pluginInfo: {
 				path: deviceInfo.path,
